@@ -4,6 +4,7 @@
 
 IMPORTANT NOTE: A directory should be created in the src directory, called firebase, into which an init.js file should be created. In this file should be placed the config code that is copied from the Firebase setup process, as well as this code:
 
+``` bash
 import firebase from 'firebase'
 import firestore from 'firebase/firestore'
 
@@ -13,6 +14,7 @@ const firebaseApp = firebase.initializeApp(config);
 firebaseApp.firestore().settings({ timestampsInSnapshots: true })
 
 export default firebaseApp.firestore()
+```
 
 Also note that the firebase.initializeApp() function is stored in a constant for export.
 
