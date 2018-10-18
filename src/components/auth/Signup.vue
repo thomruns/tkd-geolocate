@@ -13,6 +13,7 @@
       <div class="field">
         <label for="alias">Screenname:</label>
         <input type="text" name="alias" v-model="alias">
+        <p class="red-text center" v-if="feedback">{{ feedback }}</p>
       </div>
       <div class="field center">
         <button class="btn deep-purple">Signup</button>
@@ -22,18 +23,40 @@
 </template>
 
 <script>
+import slugify from 'slugify' // to create a slug from input
+import db from '@/firebase/init' // get the Firebase database
+
 export default {
   name: 'Signup',
   data() {
     return {
       email: null,
       password: null,
-      alias: null
+      alias: null,
+      feedback: null,
+      slug: null
     }
   },
   methods: {
     signup() {
-      
+      if(this.alias) {
+        this.slug = slugify(this.alias, {
+          replacement: '-',
+          remove: /[$*_+~.()'"!\-:@]/g,
+          lower: true
+        })
+        let ref = db.collection('users').doc(this.slug)
+        ref.get().then(doc => {
+          if(doc.exists) {
+            this.feedback = "This username already exists"
+          } else {
+            this.feedback = "You may use this username"
+          }
+        })
+        console.log(this.slug)
+      } else {
+        this.feedback = "You must enter your username"
+      }
     }
   }
 }
