@@ -5,7 +5,7 @@
         <a href="" class="brand-logo left">GeoLocate Users</a>
         <ul class="right">
           <li><router-link :to="{ name: 'Signup' }">Sign up</router-link></li>
-          <li><a href="">Login</a></li>
+          <li><router-link :to="{ name: 'Login' }">Log in</router-link></li>
           <li><a @click="logout">Log out</a></li>
         </ul>
       </div>
