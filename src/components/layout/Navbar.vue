@@ -4,8 +4,9 @@
       <div class="container">
         <a href="" class="brand-logo left">GeoLocate Users</a>
         <ul class="right">
-          <li><a href="">Signup</a></li>
+          <li><router-link :to="{ name: 'Signup' }">Sign up</router-link></li>
           <li><a href="">Login</a></li>
+          <li><a @click="logout">Log out</a></li>
         </ul>
       </div>
     </nav>
@@ -13,11 +14,20 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'Navbar',
   data() {
     return {
 
+    }
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut().then(() => {
+        this.$router.push( { name: 'Signup' })
+      })
     }
   }
 }
