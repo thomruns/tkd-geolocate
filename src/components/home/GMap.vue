@@ -37,7 +37,7 @@ export default {
         this.lat = pos.coords.latitude
         this.lng = pos.coords.longitude
 
-        // find user recover, update geo coords
+        // find user record, update geo coords
         db.collection('users').where('user_id', '==', user.uid).get()
         .then(snapshot => {
           snapshot.forEach((doc) => {
