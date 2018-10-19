@@ -58,7 +58,7 @@ export default {
                 geolocation: null,
                 user_id: cred.user.uid
               })
-              console.log(cred.user)
+              //console.log(cred.user)
             })
             .then(() => {
               this.$router.push({ name: 'GMap' })
