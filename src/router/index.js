@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
       // user signed in; proceed to route
       next()
     } else {
-      // not signed in, redirect to loging
+      // not signed in, redirect to login
       next({ name: 'Login' })
     }
   } else {
