@@ -39,7 +39,7 @@ export default {
             })
             // addd click event to marker
             marker.addListener('click', () => {
-              console.log(doc.id)
+              this.$router.push({ name: 'ViewProfile', params: { id: doc.id }})
             })
           }
         })
