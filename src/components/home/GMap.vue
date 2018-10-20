@@ -34,7 +34,8 @@ export default {
                 lat: data.geolocation.lat,
                 lng:data.geolocation.lng
               },
-              map: map
+              map: map,
+              title: doc.id
             })
             // addd click event to marker
             marker.addListener('click', () => {
