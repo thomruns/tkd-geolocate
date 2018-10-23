@@ -14,3 +14,9 @@ firebase
 *.njsproj
 *.sln
 *.txt
+.firebase/hosting.ZGlzdA.cache
+firestore.rules
+firebase.json
+.firebaserc
+firestore.indexes.json
+index.html
