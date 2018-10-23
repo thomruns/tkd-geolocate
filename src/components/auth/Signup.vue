@@ -26,6 +26,7 @@
 import slugify from 'slugify' // to create a slug from input
 import db from '@/firebase/init' // get the Firebase database
 import firebase from 'firebase' // get the Firebase library
+import functions from 'firebase/functions' // uset Firebase functions
 
 export default {
   name: 'Signup',
@@ -46,14 +47,15 @@ export default {
           remove: /[$*_+~.()'"!\-:@]/g,
           lower: true
         })
-        let ref = db.collection('users').doc(this.slug)
-        ref.get().then(doc => {
-          if(doc.exists) {
+        let checkAlias = firebase.functions().httpsCallable('checkAlias')
+        checkAlias({ slug: this.slug }).then(result => {
+          console.log(result)
+          if(!result.data.unique) {
             this.feedback = "This username already exists"
           } else {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(cred => {
-              ref.set({
+              db.collection('users').doc(this.slug).set({
                 alias: this.alias,
                 geolocation: null,
                 user_id: cred.user.uid
@@ -70,7 +72,6 @@ export default {
             this.feedback = "You may use this username"
           }
         })
-        console.log(this.slug)
       } else {
         this.feedback = "You must enter all fields"
       }
